@@ -89,17 +89,7 @@ export default class Navigation extends React.Component {
                   2. Custodian Wallet
                 </a>
               </NavItem>
-              <NavItem
-                className={cn(
-                  "nav-link-placement",
-                  "mr-md-4",
-                  "nav_items_collapse_style"
-                )}
-              >
-                <a className={cn("nav_link")} href="/deactivate">
-                  3. Deactivate
-                </a>
-              </NavItem>
+              
             </Nav>
           </Collapse>
         </Navbar>

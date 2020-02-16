@@ -71,7 +71,7 @@ export default class Coinbase extends Component {
         <Row className={cn(align.full, align.noMarginPad, align.allCenter)}>
           <Col xs="4" className={cn(align.allCenter, align.noMarginPad)}>
             
-          <StepWizard ref={this.wizardRef} stepMeta={steps} noButtons noHeader>
+          <StepWizard ref={this.wizardRef} lightIndicator stepMeta={steps} noButtons noHeader>
               <CoinbaseStep1 forgot={this.forgot} />
               <CoinbaseStep2 reset={this.reset} />
               <CoinbaseStep3 />
