@@ -8,6 +8,9 @@ import Navigation from "Components/Navbar/Coinbase";
 import CoinbaseStep1 from "./Step1";
 import CoinbaseStep2 from "./Step2";
 import CoinbaseStep3 from "./Step3";
+import CoinbaseStep4 from "./Step4";
+import CoinbaseStep5 from "./Step5";
+import CoinbaseStep6 from "./Step6";
 
 export default class Coinbase extends Component {
   constructor(props) {
@@ -23,16 +26,16 @@ export default class Coinbase extends Component {
   }
 
   forgot = () => {
-    if(this.wizardRef.current) {
+    if (this.wizardRef.current) {
       this.wizardRef.current.next();
     }
-  }
+  };
 
   reset = () => {
-    if(this.wizardRef.current) {
+    if (this.wizardRef.current) {
       this.wizardRef.current.next();
     }
-  }
+  };
 
   render() {
     const { functions } = this.props;
@@ -54,7 +57,7 @@ export default class Coinbase extends Component {
     ];
 
     /***
-     * 
+     *
      */
     return (
       <div
@@ -66,19 +69,23 @@ export default class Coinbase extends Component {
         )}
       >
         <Col xs="12" className={cn(align.allCenter, align.noMarginPad)}>
-          <Navigation goTo={this.props.goTo}/>
+          <Navigation goTo={this.props.goTo} />
         </Col>
         <Row className={cn(align.full, align.noMarginPad, align.allCenter)}>
           <Col xs="4" className={cn(align.allCenter, align.noMarginPad)}>
-            
-          <StepWizard ref={this.wizardRef} 
-                      stepMeta={steps} noButtons 
-                      lightIndicator >
+            <StepWizard
+              ref={this.wizardRef}
+              stepMeta={steps}
+              noButtons
+              lightIndicator
+            >
               <CoinbaseStep1 forgot={this.forgot} />
               <CoinbaseStep2 reset={this.reset} />
               <CoinbaseStep3 />
+              <CoinbaseStep4 />
+              <CoinbaseStep5 />
+              <CoinbaseStep6 />
             </StepWizard>
-            
           </Col>
         </Row>
       </div>
