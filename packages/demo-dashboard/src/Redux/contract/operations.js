@@ -8,12 +8,12 @@ import { ArbProvider } from "arb-provider-ethers";
 const ADDR = "0x895521964D724c8362A36608AAf09A3D7d0A0445"; // arbitrum
 // const ADDR = "0xdd03704a1d8540b12889a7837161127632c21c14"; // rollup
 
-const ADDR_ROPSTEN = "0xAA92f0E922ea64912DE454048deF8D3274260f47"; // arbitrum
-const ROPSTEN_WEB3_ENDPOINT = 'https://ropsten.infura.io/v3/858e36827c5143c4b150988e2d1a7145';
-const ROPSTEN_WEB3_PRIVATE_KEY = '0xe010aC6e0248790e08F42d5F697160DEDf97E024';
+const ADDR_ROPSTEN = "0xAA92f0E922ea64912DE454048deF8D3274260f47";
+const ROPSTEN_WEB3_ENDPOINT = '';
+const ROPSTEN_WEB3_PRIVATE_KEY = '';
 
 
-const initRopsten = () => async dispatch => {
+const init = () => async dispatch => {
   const resultRopsten = initRopsten()(dispatch);
   const resultRinkeby = initRinkeby()(dispatch);
   const ropsten = await resultRopsten;
