@@ -6,6 +6,7 @@ const {
   initStart: null,
   initSuccess: ['contract'],
   reset: null,
+  changeNetwork: ['contract', 'provider'],
   lastReceipt: ['receipt'],
   failure: ['error'],
   working: ['busy'],

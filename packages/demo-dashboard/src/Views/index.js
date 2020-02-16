@@ -15,6 +15,10 @@ import CoinbaseRoute from 'Routes/coinbase';
 import PortalRoute from 'Routes/customerPortal';
 
 import { default as initOps } from "Redux/init/operations";
+import {default as conOps} from 'Redux/contract/operations';
+import { Row, Col } from 'reactstrap';
+
+
 import { tryCall } from "Utils";
 
 import cn from "classnames";
@@ -54,15 +58,17 @@ class AppStart extends Component {
     }
   };
 
+  selectNetwork = e => {
+    tryCall(this.props.changeNetwork(e.target.value-0));
+  }
+
   render() {
-    const { location, match } = this.props;
+    const { location, match, networkOptions, selectedNetwork } = this.props;
     if (location.pathname === "/") {
       return <Redirect to={DEF_START} />;
     }
-    /**
- *
-              
- */
+   
+
 
     return (
       <div
@@ -74,6 +80,19 @@ class AppStart extends Component {
         )}
       >
         <Loading loading={this.props.showing} />
+        <Row className={cn(align.full, align.noMarginPad, align.allCenter)}>
+          <Col xs="12" className={cn(align.allCenter, align.noMarginPad)}>
+            <select type="select"  onChange={this.selectNetwork} >
+              {
+                networkOptions.map((o, i) => {
+                  return (
+                    <option value={o.value} selected={o.value === selectedNetwork}>{o.label}</option>
+                  )
+                })
+              }
+              </select>
+          </Col>
+        </Row>
         <Switch>
           <Route path={`${match.url}main`} component={MainRoute} />
           <Route path={`${match.url}coinbase`} component={CoinbaseRoute} />
@@ -89,8 +108,21 @@ class AppStart extends Component {
 }
 
 const s2p = state => {
+  let con = state.contract.instance;
+  let prov = state.contract.provider;
+  let idx = state.contract.availableProviders.indexOf(prov);
+  let networkOptions = [{
+    label: "Layer2--Rinkey",
+    value: 0
+  },{
+    label: "Web3--Roptsten",
+    value: 1
+  }];
+
   return {
-    loading: state.init.loading
+    loading: state.init.loading,
+    selectedNetwork: idx,
+    networkOptions
   };
 };
 
@@ -98,6 +130,9 @@ const d2p = dispatch => {
   return {
     runInit: () => {
       dispatch(initOps.start());
+    },
+    changeNetwork: (id) => {
+      dispatch(conOps.changeNetwork(id))
     }
   };
 };

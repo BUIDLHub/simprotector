@@ -4,7 +4,7 @@ import {withRouter} from 'react-router-dom';
 
 const s2p = state => {
     return {
-        
+        lastReceipt: state.contract.lastReceipt
     } 
 } 
 

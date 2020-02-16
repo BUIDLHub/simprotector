@@ -19,23 +19,33 @@ const CoinbaseStep5 = props => {
       <Row className={cn(align.full, align.noMarginPad, align.allCenter)}>
         <Col xs="12" className={cn(align.allCenter, align.noMarginPad)}>
           <span className={cn("font-weight-bold", "text-1-5")}>
-            Forgot your password?
+            Set your new password
           </span>
         </Col>
-        <FormGroup className={cn(align.full, align.noMarginPad)}>
+        <FormGroup className={cn(align.full, align.topCenter, align.noMarginPad)}>
           <Col xs="12" className={cn(align.allCenter, align.noMarginPad)}>
             <InputField
               className={cn(align.full, "px-3")}
-              name="email"
-              placeholder="email"
+              name="p1"
+              placeholder="password"
             />
           </Col>
+
+          <Col xs="12" className={cn(align.allCenter, align.noMarginPad)}>
+            <InputField
+              className={cn(align.full, "px-3")}
+              name="p2"
+              placeholder="password confirm"
+            />
+          </Col>
+
+
           <Col
             xs="12"
             className={cn(align.leftCenter, "p-3", align.noMarginPad)}
           >
-            <Button size="sm" onClick={props.reset}>
-              RESET PASSWORD
+            <Button size="sm" onClick={props.onClick}>
+              SAVE PASSWORD
             </Button>
           </Col>
         </FormGroup>

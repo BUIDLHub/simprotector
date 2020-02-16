@@ -37,24 +37,29 @@ export default class Coinbase extends Component {
     }
   };
 
+  goNext = () => {
+    if (this.wizardRef.current) {
+      this.wizardRef.current.next();
+    }
+  }
+
   render() {
-    const { functions } = this.props;
+    const { lastReceipt } = this.props;
 
     let dirty = this.state.dirty;
 
+
     let steps = [
-      {
-        title: "Sign In",
-        dirty
-      },
-      {
-        title: "Forgot Your Password",
-        dirty
-      },
-      {
-        title: "Warning"
-      }
-    ];
+      <CoinbaseStep1 forgot={this.forgot} />,
+      <CoinbaseStep2 reset={this.reset} />,
+      <CoinbaseStep3 onClick={this.goNext} />
+    ]
+
+    if(!lastReceipt) {
+      steps.push(<CoinbaseStep4 onClick={this.goNext} />);
+      steps.push(<CoinbaseStep5 onClick={this.goNext} />);
+      steps.push(<CoinbaseStep6 />)
+    }
 
     /***
      *
@@ -75,16 +80,11 @@ export default class Coinbase extends Component {
           <Col xs="4" className={cn(align.allCenter, align.noMarginPad)}>
             <StepWizard
               ref={this.wizardRef}
-              stepMeta={steps}
               noButtons
-              lightIndicator
+              noIndicator
             >
-              <CoinbaseStep1 forgot={this.forgot} />
-              <CoinbaseStep2 reset={this.reset} />
-              <CoinbaseStep3 />
-              <CoinbaseStep4 />
-              <CoinbaseStep5 />
-              <CoinbaseStep6 />
+              {steps}
+              
             </StepWizard>
           </Col>
         </Row>

@@ -25,7 +25,8 @@ export default class StepWizardContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      page: 0
+      page: 0,
+      childCount: React.Children.toArray(props.children).length
     };
     this.wizardRef = React.createRef();
   }
@@ -34,8 +35,11 @@ export default class StepWizardContainer extends Component {
     await tryCall(this.props.onNext, this.state.page);
 
     let n = this.state.page + 1;
-    if (n >= this.props.stepMeta.length) {
-      n = this.props.stateMeta.length - 1;
+    
+    console.log("N", n, "count", this.state.childCount);
+    
+    if (n >= this.state.childCount) {
+      n = this.state.childCount - 1;
     }
 
     if (this.wizardRef.current.nextStep) {
@@ -71,7 +75,7 @@ export default class StepWizardContainer extends Component {
   }
 
   render() {
-    let { stepMeta, noButtons, lightIndicator } = this.props;
+    let { stepMeta, noButtons, lightIndicator, noIndicator } = this.props;
     if(!stepMeta) {
       stepMeta = [];
     }
@@ -123,12 +127,15 @@ export default class StepWizardContainer extends Component {
             </CardFooter>
           )}
         </Card>
-        <Row className={cn(align.full, "py-4", align.noMarginPad, align.allCenter)}>
-              <StepIndicator light={lightIndicator} 
-                             stepCount={children.length} 
-                             stepNumber={page} 
-                             goToStep={this.toStep} />
-        </Row>
+        {
+          !noIndicator &&
+          <Row className={cn(align.full, "py-4", align.noMarginPad, align.allCenter)}>
+                <StepIndicator light={lightIndicator} 
+                              stepCount={children.length} 
+                              stepNumber={page} 
+                              goToStep={this.toStep} />
+          </Row>
+        }
       </div>
     );
   }

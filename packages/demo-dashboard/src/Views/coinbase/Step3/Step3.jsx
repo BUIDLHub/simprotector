@@ -5,6 +5,7 @@ import React from "react";
 // import InputField from "Components/Card/Input";
 import Button from "Components/Button/Progress";
 import { Icon } from "Components/icons";
+import SendCode from './SendCode';
 
 const DAY = 86400000;
 
@@ -12,9 +13,28 @@ export default class Step3 extends React.Component {
   render() {
     const { lastEvent } = this.props;
     if (!lastEvent) {
-      return null;
+      return (
+        <SendCode {...this.props} />
+      )
     }
 
+    
+    /***
+     * <Row
+              className={cn(
+                align.full,
+                "py-3",
+                align.noMarginPad,
+                align.allCenter
+              )}
+            >
+              <Col xs="10" className={cn(align.allCenter, align.noMarginPad)}>
+                <span className={cn("font-weight-bold", "text-1-2")}>
+                  Locked until {expDate}
+                </span>
+              </Col>
+            </Row>
+     */
     let exp = lastEvent.timestamp + 7 * DAY;
     let expDate = new Date(exp).toString();
 
@@ -68,20 +88,7 @@ export default class Step3 extends React.Component {
                 </span>
               </Col>
             </Row>
-            <Row
-              className={cn(
-                align.full,
-                "py-3",
-                align.noMarginPad,
-                align.allCenter
-              )}
-            >
-              <Col xs="10" className={cn(align.allCenter, align.noMarginPad)}>
-                <span className={cn("font-weight-bold", "text-1-2")}>
-                  Locked until {expDate}
-                </span>
-              </Col>
-            </Row>
+            
             <Row className={cn(align.full, align.noMarginPad, align.allCenter)}>
               <Col xs="10" className={cn(align.allCenter, align.noMarginPad)}>
                 <span className={cn("font-weight-light", "text-1")}>

@@ -5,7 +5,7 @@ import axios from 'axios';
 const flowURL = "https://52429878-ff2d-566f-ab61-06226c536592.buidlhub.net/v1/trigger";
 
 const s2p = state => {
-  let lastEvent = state.contract.recentEvents[0];
+  let lastEvent = state.contract.lastReceipt;
 
   return {
     lastEvent
@@ -16,9 +16,11 @@ const s2p = state => {
    return {
 
     sendText: async code => {
-      let r = await axios.post(flowURL, {
-        code
-      });
+      try {
+        await axios.post(flowURL, {
+          code
+        });
+      } catch (e){}
     }
   } 
 } 

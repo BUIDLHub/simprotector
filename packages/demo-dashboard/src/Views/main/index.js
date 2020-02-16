@@ -11,7 +11,7 @@ const s2p = state => {
  const d2p = (dispatch,own) => { 
      return {
         sendTxn: (data) => {
-           return dispatch(conOps.registerPhoneNumber(data.phoneNumber, data.address));
+           return dispatch(conOps.registerSimChange(data.phoneNumber, data.address));
         },
         goTo: url => {
             own.history.push(url);
